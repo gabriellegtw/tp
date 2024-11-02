@@ -9,12 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -47,7 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NETID + "EMAIL] "
             + "[" + PREFIX_MAJOR + "MAJOR] "
             + "[" + PREFIX_YEAR + "YEAR] "
-            + "[" + PREFIX_GROUP + "TAG]...\n"
+            + "[" + PREFIX_GROUP + "GROUP]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENTID + "A1234567B "
             + PREFIX_NETID + "e1234567";
@@ -105,11 +102,11 @@ public class EditCommand extends Command {
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Major updatedAddress = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
+        Group updatedGroup = editPersonDescriptor.getGroup().orElse(personToEdit.getGroup());
         Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
         Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
         return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress,
-                updatedGroups, updatedYear, updatedComment);
+                updatedGroup, updatedYear, updatedComment);
     }
 
     @Override
@@ -145,7 +142,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private Email email;
         private Major major;
-        private Set<Group> groups;
+        private Group group;
         private Year year;
         private Comment comment;
 
@@ -160,7 +157,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.studentId);
             setEmail(toCopy.email);
             setMajor(toCopy.major);
-            setTags(toCopy.groups);
+            setGroup(toCopy.group);
             setYear(toCopy.year);
             setComment(toCopy.comment);
         }
@@ -169,7 +166,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, email, major, groups, year);
+            return CollectionUtil.isAnyNonNull(name, studentId, email, major, group, year);
         }
 
         public void setName(Name name) {
@@ -221,8 +218,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Group> groups) {
-            this.groups = (groups != null) ? new HashSet<>(groups) : null;
+        public void setGroup(Group group) {
+            this.group = group;
         }
 
         /**
@@ -230,8 +227,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Group>> getGroups() {
-            return (groups != null) ? Optional.of(Collections.unmodifiableSet(groups)) : Optional.empty();
+        public Optional<Group> getGroup() {
+            return Optional.ofNullable(group);
         }
 
         @Override
@@ -251,7 +248,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(major, otherEditPersonDescriptor.major)
                     && Objects.equals(year, otherEditPersonDescriptor.year)
-                    && Objects.equals(groups, otherEditPersonDescriptor.groups);
+                    && Objects.equals(group, otherEditPersonDescriptor.group);
         }
 
         @Override
@@ -262,7 +259,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("major", major)
                     .add("year", year)
-                    .add("groups", groups)
+                    .add("group", group)
                     .toString();
         }
     }

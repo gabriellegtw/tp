@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MAJOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -17,12 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getGroups().remove(0));
-    }
 
     @Test
     public void isSamePerson() {
@@ -87,7 +80,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", studentId="
                 + ALICE.getStudentId() + ", email=" + ALICE.getEmail()
-                + ", major=" + ALICE.getMajor() + ", year=" + ALICE.getYear() + ", groups=" + ALICE.getGroups()
+                + ", major=" + ALICE.getMajor() + ", year=" + ALICE.getYear() + ", group=" + ALICE.getGroup()
                 + ", comment=" + ALICE.getComment() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -6,7 +6,7 @@
     "email" : "e1234567@u.nus.edu",
     "major" : "Computer Science",
     "year" : "2",
-    "groups": [ ],
+    "group": "group 1",
     "comment": ""
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "e1224567@u.nus.edu",
     "major" : "Mechanical Engineering",
     "year" : "1",
-    "groups": [ ],
+    "group": "group 1",
     "comment": ""
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +22,7 @@
     "email" : "e1234467@u.nus.edu",
     "major" : "Business",
     "year" : "3",
-    "groups": [ ],
+    "group": "group 2",
     "comment": ""
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +30,7 @@
     "email" : "e1234667@u.nus.edu",
     "major" : "English Literature",
     "year" : "5",
-    "groups": [ ],
+    "group": "group 3",
     "comment": ""
   }, {
     "name" : "Elle Meyer",
@@ -38,7 +38,7 @@
     "email" : "e1234557@u.nus.edu",
     "major" : "China Studies",
     "year" : "2",
-    "groups": [ ],
+    "group": "group 3",
     "comment": ""
   }, {
     "name" : "Fiona Kunz",
@@ -46,7 +46,7 @@
     "email" : "e1234577@u.nus.edu",
     "major" : "Electrical Engineering",
     "year" : "1",
-    "groups": [ ],
+    "group": "group 4",
     "comment": ""
   }, {
     "name" : "George Best",
@@ -54,7 +54,7 @@
     "email" : "e1134567@u.nus.edu",
     "major" : "Religious Studies",
     "year" : "1",
-    "groups": [ ],
+    "group": "group 4",
     "comment": ""
   } ]
 }

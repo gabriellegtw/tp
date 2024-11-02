@@ -19,7 +19,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    //private final List<AttendanceEvent> attendanceEvents;
     private final ObservableList<AttendanceEvent> attendanceEvents = FXCollections.observableArrayList();
 
     /*
@@ -31,7 +30,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        //attendanceEvents = new ArrayList<>();
     }
 
     public AddressBook() {}

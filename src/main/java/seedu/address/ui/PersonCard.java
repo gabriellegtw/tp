@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -44,7 +42,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane groups;
+    private FlowPane group;
     @FXML
     private VBox fields;
     @FXML
@@ -65,9 +63,9 @@ public class PersonCard extends UiPart<Region> {
         year.setText(person.getYear().value);
         email.setText(person.getEmail().value);
         comment.setText(person.getComment().value);
-        person.getGroups().stream()
-                .sorted(Comparator.comparing(group -> group.groupName))
-                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
+        if (!person.getGroup().toString().isEmpty()) {
+            group.getChildren().add(new Label(person.getGroup().toString()));
+        }
 
 
         removeOptionalLabels(fields);

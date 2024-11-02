@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -50,6 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Year year = Year.makeYear("");
         Major major = Major.makeMajor("");
         Email email = Email.makeEmail("");
+        Group group = new Group();
 
         if (isPrefixPresent(argMultimap, PREFIX_YEAR)) {
             year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
@@ -63,11 +63,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
         }
 
-        Set<Group> groupList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_GROUP));
+        if (isPrefixPresent(argMultimap, PREFIX_GROUP)) {
+            group = ParserUtil.parseOptionalGroup(argMultimap.getValue(PREFIX_GROUP).get());
+        }
 
         Comment comment = new Comment("");
 
-        Person person = new Person(name, studentId, email, major, groupList, year, comment);
+        Person person = new Person(name, studentId, email, major, group, year, comment);
 
         return new AddCommand(person);
     }

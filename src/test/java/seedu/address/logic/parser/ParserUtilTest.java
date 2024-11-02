@@ -144,25 +144,25 @@ public class ParserUtilTest {
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroup(null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseOptionalGroup(null));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseGroup(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseOptionalGroup(INVALID_TAG));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Group expectedGroup = new Group(VALID_GROUP_1);
-        assertEquals(expectedGroup, ParserUtil.parseGroup(VALID_GROUP_1));
+        assertEquals(expectedGroup, ParserUtil.parseOptionalGroup(VALID_GROUP_1));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_GROUP_1 + WHITESPACE;
         Group expectedGroup = new Group(VALID_GROUP_1);
-        assertEquals(expectedGroup, ParserUtil.parseGroup(tagWithWhitespace));
+        assertEquals(expectedGroup, ParserUtil.parseOptionalGroup(tagWithWhitespace));
     }
 
     @Test

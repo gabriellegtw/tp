@@ -5,7 +5,7 @@
     "email" : "e1234567@u.nus.edu",
     "major" : "Computer Science",
     "year" : "2",
-    "groups": [ ],
+    "group": "group 2",
     "comment": ""
   }, {
     "name" : "Alice Pauline",
@@ -13,7 +13,7 @@
     "email" : "e1234567@u.nus.edu",
     "major" : "Computer Science",
     "year" : "2",
-    "groups": [ ],
+    "group": "group 2",
     "comment": ""
   } ]
 }

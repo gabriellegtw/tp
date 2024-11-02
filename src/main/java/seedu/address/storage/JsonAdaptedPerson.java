@@ -1,11 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,7 +25,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String major;
     private final String year;
-    private final List<JsonAdaptedGroup> groups = new ArrayList<>();
+    private final String group;
     private final String comment;
 
     /**
@@ -40,16 +34,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
             @JsonProperty("email") String email, @JsonProperty("major") String major, @JsonProperty("year") String year,
-            @JsonProperty("groups") List<JsonAdaptedGroup> groups, @JsonProperty("comment") String comment) {
+            @JsonProperty("group") String group, @JsonProperty("comment") String comment) {
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.major = major;
         this.year = year;
         this.comment = comment;
-        if (groups != null) {
-            this.groups.addAll(groups);
-        }
+        this.group = group;
     }
 
     /**
@@ -61,9 +53,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         major = source.getMajor().value;
         year = source.getYear().value;
-        groups.addAll(source.getGroups().stream()
-                .map(JsonAdaptedGroup::new)
-                .collect(Collectors.toList()));
+        group = source.getGroup().toString();
         comment = source.getComment().value;
     }
 
@@ -73,10 +63,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Group> personGroups = new ArrayList<>();
-        for (JsonAdaptedGroup tag : groups) {
-            personGroups.add(tag.toModelType());
-        }
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -128,9 +114,11 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
         }
         final Comment modelComment = new Comment(comment);
-
-        final Set<Group> modelGroups = new HashSet<>(personGroups);
-        return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear, modelComment);
+        if (group == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
+        }
+        final Group modelGroup = new Group(group);
+        return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroup, modelYear, modelComment);
     }
 
 }

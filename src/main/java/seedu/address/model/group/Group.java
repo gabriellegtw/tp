@@ -24,9 +24,16 @@ public class Group {
      */
     public Group(String groupName) {
         requireNonNull(groupName);
-        checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
-        this.groupName = groupName;
+        if (groupName.isEmpty()) {
+            this.groupName = "";
+        } else {
+            checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
+            this.groupName = groupName;
+        }
         logger.info("A group is created: " + this.groupName);
+    }
+    public Group() {
+        groupName = "";
     }
 
     /**

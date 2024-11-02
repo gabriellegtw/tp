@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
@@ -12,7 +8,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Year;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -33,7 +28,7 @@ public class PersonBuilder {
     private Email email;
     private Major major;
     private Year year;
-    private Set<Group> groups;
+    private Group group;
     private Comment comment;
 
     /**
@@ -45,7 +40,7 @@ public class PersonBuilder {
         email = Email.makeEmail(DEFAULT_EMAIL);
         major = Major.makeMajor(DEFAULT_MAJOR);
         year = Year.makeYear(DEFAULT_YEAR);
-        groups = new HashSet<>(Collections.singleton(new Group(DEFAULT_GROUP)));
+        group = new Group(DEFAULT_GROUP);
         comment = new Comment(DEFAULT_COMMENT);
     }
 
@@ -58,7 +53,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         major = personToCopy.getMajor();
         year = personToCopy.getYear();
-        groups = new HashSet<>(personToCopy.getGroups());
+        group = personToCopy.getGroup();
         comment = personToCopy.getComment();
     }
 
@@ -73,8 +68,12 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.groups = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withGroup(String group) {
+        if (group.isEmpty()) {
+            this.group = new Group();
+        } else {
+            this.group = new Group(group);
+        }
         return this;
     }
 
@@ -119,7 +118,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, studentId, email, major, groups, year, comment);
+        return new Person(name, studentId, email, major, group, year, comment);
     }
 
 }

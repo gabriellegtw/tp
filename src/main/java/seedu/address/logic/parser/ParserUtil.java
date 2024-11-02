@@ -175,9 +175,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Group parseGroup(String tag) throws ParseException {
+    public static Group parseOptionalGroup(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        if (trimmedTag.isEmpty()) {
+            return new Group();
+        }
         if (!Group.isValidGroupName(trimmedTag)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
@@ -191,7 +194,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Group> groupSet = new HashSet<>();
         for (String tagName : tags) {
-            groupSet.add(parseGroup(tagName));
+            groupSet.add(parseOptionalGroup(tagName));
         }
         return groupSet;
     }
